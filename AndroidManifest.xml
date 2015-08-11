@@ -52,6 +52,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.google.sample.cast.refplayer.Channel_controller"></activity>
+
         <activity
             android:name="com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|uiMode"

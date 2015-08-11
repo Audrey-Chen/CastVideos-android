@@ -16,14 +16,6 @@
 
 package com.google.sample.cast.refplayer;
 
-import com.google.android.gms.cast.ApplicationMetadata;
-import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
-import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumer;
-import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
-import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
-import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
-import com.google.sample.cast.refplayer.settings.CastPreference;
-
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -39,8 +31,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+///////////
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+//////////
+
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.cast.ApplicationMetadata;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumer;
+import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
+import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
+import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
+import com.google.sample.cast.refplayer.settings.CastPreference;
 
 public class VideoBrowserActivity extends AppCompatActivity {
 
@@ -125,6 +129,9 @@ public class VideoBrowserActivity extends AppCompatActivity {
 
         setupActionBar();
         mCastManager.reconnectSessionIfPossible();
+
+        /* Detect Swipe gesture below */
+        gestureDetector = new GestureDetector(new SwipeGestureDetector());
     }
 
     private void setupActionBar() {
