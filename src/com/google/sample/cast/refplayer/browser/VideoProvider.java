@@ -16,13 +16,13 @@
 
 package com.google.sample.cast.refplayer.browser;
 
+import android.net.Uri;
+import android.util.Log;
+
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.MediaTrack;
 import com.google.android.gms.common.images.WebImage;
-
-import android.net.Uri;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,7 +70,7 @@ public class VideoProvider {
 
     public static final String KEY_DESCRIPTION = "description";
 
-    private static final String TARGET_FORMAT = TAG_HLS;
+    private static final String TARGET_FORMAT = TAG_MP4; // We can decide the video format here
     private static List<MediaInfo> mediaList;
 
     protected JSONObject parseUrl(String urlString) {

@@ -16,13 +16,6 @@
 
 package com.google.sample.cast.refplayer.browser;
 
-import com.google.android.gms.cast.MediaInfo;
-import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
-import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
-import com.google.android.libraries.cast.companionlibrary.utils.Utils;
-import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -40,6 +33,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.android.gms.cast.MediaInfo;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
+import com.google.android.libraries.cast.companionlibrary.utils.Utils;
+import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.mediaplayer.LocalPlayerActivity;
+
 import java.util.List;
 
 /**
@@ -49,8 +49,7 @@ public class VideoBrowserFragment extends Fragment implements VideoListAdapter.I
         LoaderManager.LoaderCallbacks<List<MediaInfo>> {
 
     private static final String TAG = "VideoBrowserFragment";
-    private static final String CATALOG_URL =
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/f.json";
+    private static final String CATALOG_URL ="http://www.cs.ccu.edu.tw/~cml100u/CSCLAB/f2.json";
     private RecyclerView mRecyclerView;
     private VideoListAdapter mAdapter;
     private View mEmptyView;

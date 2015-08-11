@@ -65,4 +65,9 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="ccl_mini_upcoming_background">@color/primary</color>
+
+    <!--The color style of channel controller is write down below.-->
+
+    <color name="button_go" >#66BB6A</color>
+
 </resources>
