@@ -30,11 +30,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-///////////
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-//////////
+import android.widget.Button;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -46,6 +42,7 @@ import com.google.android.libraries.cast.companionlibrary.widgets.MiniController
 import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
 import com.google.sample.cast.refplayer.settings.CastPreference;
 
+
 public class VideoBrowserActivity extends AppCompatActivity {
 
     private static final String TAG = "VideoBrowserActivity";
@@ -55,6 +52,7 @@ public class VideoBrowserActivity extends AppCompatActivity {
     private MenuItem mediaRouteMenuItem;
     private boolean mIsHoneyCombOrAbove = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
     private Toolbar mToolbar;
+    private Button button_controller;
 
     /*
      * (non-Javadoc)
@@ -67,6 +65,19 @@ public class VideoBrowserActivity extends AppCompatActivity {
         setContentView(R.layout.video_browser);
 
         mCastManager = VideoCastManager.getInstance();
+        button_controller = (Button)findViewById(R.id.button_controller);
+
+        /* Detect Switch the controller */
+        button_controller.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                /* Entering the controller */
+                Intent intent = new Intent();
+                intent.setClass(VideoBrowserActivity.this, Channel_controller.class);
+                startActivity(intent);
+            }
+        });
 
         // -- Adding MiniController
         mMini = (MiniController) findViewById(R.id.miniController1);
@@ -130,8 +141,8 @@ public class VideoBrowserActivity extends AppCompatActivity {
         setupActionBar();
         mCastManager.reconnectSessionIfPossible();
 
-        /* Detect Swipe gesture below */
-        gestureDetector = new GestureDetector(new SwipeGestureDetector());
+
+
     }
 
     private void setupActionBar() {

@@ -117,7 +117,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
 
     private Button.OnClickListener Controller_OnClick = new Button.OnClickListener()
     {
-        public void OnClick(View v)
+        public void onClick(View v)
         {
             int channel = 0;
 
