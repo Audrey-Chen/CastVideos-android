@@ -1,5 +1,6 @@
 package com.google.sample.cast.refplayer;
 
+import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
@@ -15,7 +16,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
     private Button button1, button2, button3,
                    button4, button5, button6,
                    button7, button8, button9,
-                   button0, button_go, button_back;
+                   button0, button_go, button_back, button_vid_list;
 
     private TextView textView, display_channel;
 
@@ -27,58 +28,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         SetObjFunc(); // Create and define object
         SetOnClick();
 
-        /*
-        button0.setOnClickListener(new Button.OnClickListener(){
-         @Override
-         public void onClick(View v){display_channel.setText("0");}
-        });
 
-        button1.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("1");}
-        });
-
-        button2.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("2");}
-        });
-
-        button3.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("3");}
-        });
-
-        button4.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("4");}
-        });
-
-        button5.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("5");}
-        });
-
-        button6.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("6");}
-        });
-
-        button7.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("7");}
-        });
-
-        button8.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("8");}
-        });
-
-        button9.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){display_channel.setText("9");}
-        });
-
-*/
     }
 
     private void SetObjFunc(){
@@ -95,6 +45,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         button9 = (Button)findViewById(R.id.button9);
         button_go = (Button)findViewById(R.id.button_go);
         button_back = (Button)findViewById(R.id.button_back);
+        button_vid_list = (Button)findViewById(R.id.button_vid_list);
 
         textView = (TextView)findViewById(R.id.textView);
         display_channel = (TextView)findViewById(R.id.display_channel);
@@ -113,34 +64,58 @@ public class Channel_controller extends Activity { // ActionBarActivity
         button9.setOnClickListener(Controller_OnClick);
         button_go.setOnClickListener(Controller_OnClick);
         button_back.setOnClickListener(Controller_OnClick);
+        button_vid_list.setOnClickListener(Controller_OnClick);
     }
 
     private Button.OnClickListener Controller_OnClick = new Button.OnClickListener()
     {
         public void onClick(View v)
         {
-            int channel = 0;
-
             switch(v.getId()) // Judging which button is clicked
             {
                 /* The number buttons */
-                case R.id.button0: display_channel.setText("0");break;
-                case R.id.button1: display_channel.setText("1"); channel = 1;break;
-                case R.id.button2: display_channel.setText("2"); channel = 2;break;
-                case R.id.button3: display_channel.setText("3"); channel = 3;break;
-                case R.id.button4: display_channel.setText("4"); channel = 4;break;
-                case R.id.button5: display_channel.setText("5"); channel = 5;break;
-                case R.id.button6: display_channel.setText("6"); channel = 6;break;
-                case R.id.button7: display_channel.setText("7"); channel = 7;break;
-                case R.id.button8: display_channel.setText("8"); channel = 8;break;
-                case R.id.button9: display_channel.setText("9"); channel = 9;break;
+                case R.id.button0: Display_Num("0");break;
+                case R.id.button1: Display_Num("1");break;
+                case R.id.button2: Display_Num("2");break;
+                case R.id.button3: Display_Num("3");break;
+                case R.id.button4: Display_Num("4");break;
+                case R.id.button5: Display_Num("5");break;
+                case R.id.button6: Display_Num("6");break;
+                case R.id.button7: Display_Num("7");break;
+                case R.id.button8: Display_Num("8");break;
+                case R.id.button9: Display_Num("9");break;
 
                 /* Other function buttons */
                 case R.id.button_go:break;
-
+                case R.id.button_back:
+                    display_channel.setText(""); // Clear the input number
+                    break;
+                case R.id.button_vid_list:
+                    /* Back to the video list */
+                    Intent intent = new Intent();
+                    intent.setClass(Channel_controller.this, VideoBrowserActivity.class );
+                    startActivity(intent);
+                    break;
             }
         }
     };
+
+    private void Display_Num(String S)
+    {
+        String new_num;
+        String zero = "0";
+        new_num = display_channel.getText().toString();
+
+        if( new_num.equals(zero)  )
+        {
+            display_channel.setText("");
+            display_channel.setText(S);
+        }
+        else
+        {
+            display_channel.setText(new_num + S);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

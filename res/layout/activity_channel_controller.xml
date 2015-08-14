@@ -118,9 +118,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="back"
+        android:text="Cancel"
         android:id="@+id/button_back"
-        android:layout_below="@+id/button0"
+        android:layout_above="@+id/button_go"
         android:layout_alignLeft="@+id/button9"
         android:layout_alignStart="@+id/button9" />
 
@@ -132,12 +132,13 @@
         android:layout_below="@+id/button0"
         android:layout_alignLeft="@+id/button7"
         android:layout_alignStart="@+id/button7"
-        android:layout_toLeftOf="@+id/button_back"
         android:layout_toStartOf="@+id/button_back"
         style="@style/Base.TextAppearance.AppCompat.Button"
         android:background="@color/button_go"
         android:clickable="true"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -146,5 +147,17 @@
         android:id="@+id/display_channel"
         android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video List"
+        android:id="@+id/button_vid_list"
+        android:layout_below="@+id/button_go"
+        android:layout_alignLeft="@+id/button_go"
+        android:layout_alignStart="@+id/button_go"
+        android:layout_marginTop="35dp"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 
 </RelativeLayout>
