@@ -169,7 +169,7 @@ public class VideoProvider {
                             }
                         }
                         mediaList.add(buildMediaInfo(title, studio, subTitle, duration, videoUrl,
-                                mimeType, imageUrl, bigImageUrl,tracks));
+                                mimeType, imageUrl, bigImageUrl, tracks));
                     }
                 }
             }

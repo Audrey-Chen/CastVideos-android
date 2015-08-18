@@ -126,8 +126,16 @@ public class Channel_controller extends Activity { // ActionBarActivity
         String channel = display_channel.getText().toString();
         int channel_num = Integer.parseInt(channel);
 
+        /*
+        if(channel.equals(""))
+        {
+            return;
+        }*/
+
+        display_channel.setText(""); // After loading channel number, then clear it
+
         /* Time Counter : after 10 secs, the screen would display the ControllerPlayer*/
-        Timer timer = new Timer();            //declare Timer
+        final Timer timer = new Timer();            //declare Timer
         TimerTask timerTask;    //declare TimerTask
 
         timerTask = new TimerTask(){
@@ -137,10 +145,11 @@ public class Channel_controller extends Activity { // ActionBarActivity
                 Intent intent = new Intent();
                 intent.setClass(Channel_controller.this, ControllerPlayer.class);
                 startActivity(intent);
+                timer.cancel(); // Cancel the time counter
             }
         };
 
-        //timer.schedule(timerTask, );
+        timer.schedule(timerTask, 10000,10000 ); // Wait 10 secs to switch the display screen
     }
 
     @Override
