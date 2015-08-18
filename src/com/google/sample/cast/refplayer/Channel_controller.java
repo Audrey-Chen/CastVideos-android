@@ -1,14 +1,17 @@
 package com.google.sample.cast.refplayer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.support.v7.app.ActionBarActivity;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.util.Timer;
+import java.util.TimerTask;
+
+//import android.support.v7.app.ActionBarActivity;
 
 
 public class Channel_controller extends Activity { // ActionBarActivity
@@ -86,7 +89,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
                 case R.id.button9: Display_Num("9");break;
 
                 /* Other function buttons */
-                case R.id.button_go:break;
+                case R.id.button_go: go_channel();break;
                 case R.id.button_back:
                     display_channel.setText(""); // Clear the input number
                     break;
@@ -115,6 +118,29 @@ public class Channel_controller extends Activity { // ActionBarActivity
         {
             display_channel.setText(new_num + S);
         }
+    }
+
+    private void go_channel()
+    {
+        /* Get the input channel number */
+        String channel = display_channel.getText().toString();
+        int channel_num = Integer.parseInt(channel);
+
+        /* Time Counter : after 10 secs, the screen would display the ControllerPlayer*/
+        Timer timer = new Timer();            //declare Timer
+        TimerTask timerTask;    //declare TimerTask
+
+        timerTask = new TimerTask(){
+            public void run()
+            {
+                /* Entering the Player */
+                Intent intent = new Intent();
+                intent.setClass(Channel_controller.this, ControllerPlayer.class);
+                startActivity(intent);
+            }
+        };
+
+        //timer.schedule(timerTask, );
     }
 
     @Override

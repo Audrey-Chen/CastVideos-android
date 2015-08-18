@@ -67,6 +67,7 @@ public class VideoProvider {
     private static final String TAG_THUMB = "image-480x270"; // "thumb";
     private static final String TAG_IMG_780_1200 = "image-780x1200";
     private static final String TAG_TITLE = "title";
+    private static final String TAG_CHANNEL = "channel";
 
     public static final String KEY_DESCRIPTION = "description";
 
@@ -148,6 +149,7 @@ public class VideoProvider {
                         String title = video.getString(TAG_TITLE);
                         String studio = video.getString(TAG_STUDIO);
                         int duration = video.getInt(TAG_DURATION);
+                        String channel = video.getString(TAG_CHANNEL);
                         List<MediaTrack> tracks = null;
                         if (video.has(TAG_TRACKS)) {
                             JSONArray tracksArray = video.getJSONArray(TAG_TRACKS);
@@ -167,7 +169,7 @@ public class VideoProvider {
                             }
                         }
                         mediaList.add(buildMediaInfo(title, studio, subTitle, duration, videoUrl,
-                                mimeType, imageUrl, bigImageUrl, tracks));
+                                mimeType, imageUrl, bigImageUrl,tracks));
                     }
                 }
             }

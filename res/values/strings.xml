@@ -96,4 +96,5 @@
     <string name="title_activity_channel_controller">Channel_controller</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_controller_player">ControllerPlayer</string>
 </resources>
