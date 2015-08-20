@@ -8,6 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.gms.cast.MediaInfo;
+import com.google.android.gms.cast.MediaMetadata;
+import com.google.sample.cast.refplayer.browser.VideoItemLoader;
+
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,7 +28,8 @@ public class Channel_controller extends Activity { // ActionBarActivity
                    button0, button_go, button_back, button_vid_list;
 
     private TextView textView, display_channel;
-
+    private List<MediaInfo> videos; // load the video list
+    private static final String mUrl ="http://www.cs.ccu.edu.tw/~cml100u/CSCLAB/f2.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +141,11 @@ public class Channel_controller extends Activity { // ActionBarActivity
 
         display_channel.setText(""); // After loading channel number, then clear it
 
+        /* TV display the video content at specific channel */
+        VideoItemLoader vloader = new VideoItemLoader(Channel_controller.this, mUrl);
+        videos = vloader.loadInBackground();
+        find_channel( channel_num);
+
         /* Time Counter : after 10 secs, the screen would display the ControllerPlayer*/
         final Timer timer = new Timer();            //declare Timer
         TimerTask timerTask;    //declare TimerTask
@@ -141,15 +153,40 @@ public class Channel_controller extends Activity { // ActionBarActivity
         timerTask = new TimerTask(){
             public void run()
             {
+                timer.cancel(); // Cancel the time counter
                 /* Entering the Player */
                 Intent intent = new Intent();
                 intent.setClass(Channel_controller.this, ControllerPlayer.class);
                 startActivity(intent);
-                timer.cancel(); // Cancel the time counter
             }
         };
 
         timer.schedule(timerTask, 10000,10000 ); // Wait 10 secs to switch the display screen
+    }
+
+    private void find_channel(int channel_num)
+    {
+        MediaMetadata mm ;
+        String title;
+        String channel = "";
+
+        for(int i =0; i< videos.size(); i++)
+        {
+            mm = videos.get(i).getMetadata();
+            title = mm.getString(MediaMetadata.KEY_TITLE);
+            int k = 1;
+
+            while(title.charAt(k)!= ']') {
+                channel = title.substring(1, k + 1);
+                k++;
+            }
+            int num = Integer.parseInt(channel);
+            if( channel_num == num)
+            {
+                // Cast the channel content to TV screen
+
+            }
+        }
     }
 
     @Override
