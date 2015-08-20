@@ -16,19 +16,6 @@
 
 package com.google.sample.cast.refplayer.mediaplayer;
 
-import com.google.android.gms.cast.ApplicationMetadata;
-import com.google.android.gms.cast.MediaInfo;
-import com.google.android.gms.cast.MediaMetadata;
-import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
-import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
-import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
-import com.google.sample.cast.refplayer.CastApplication;
-import com.google.sample.cast.refplayer.R;
-import com.google.sample.cast.refplayer.browser.VideoProvider;
-import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
-import com.google.sample.cast.refplayer.settings.CastPreference;
-import com.google.sample.cast.refplayer.utils.Utils;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -65,6 +52,18 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.androidquery.AQuery;
+import com.google.android.gms.cast.ApplicationMetadata;
+import com.google.android.gms.cast.MediaInfo;
+import com.google.android.gms.cast.MediaMetadata;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
+import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
+import com.google.sample.cast.refplayer.CastApplication;
+import com.google.sample.cast.refplayer.R;
+import com.google.sample.cast.refplayer.browser.VideoProvider;
+import com.google.sample.cast.refplayer.queue.ui.QueueListViewActivity;
+import com.google.sample.cast.refplayer.settings.CastPreference;
+import com.google.sample.cast.refplayer.utils.Utils;
 
 import java.util.Timer;
 import java.util.TimerTask;

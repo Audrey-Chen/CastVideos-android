@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class Channel_controller extends Activity { // ActionBarActivity
     private TextView textView, display_channel;
     private List<MediaInfo> videos; // load the video list
     private static final String mUrl ="http://www.cs.ccu.edu.tw/~cml100u/CSCLAB/f2.json";
+    private VideoCastManager mCastManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         setContentView(R.layout.activity_channel_controller);
         SetObjFunc(); // Create and define object
         SetOnClick();
-
-
+        mCastManager = VideoCastManager.getInstance();
     }
 
     private void SetObjFunc(){
@@ -184,9 +186,14 @@ public class Channel_controller extends Activity { // ActionBarActivity
             if( channel_num == num)
             {
                 // Cast the channel content to TV screen
-
+                casting(i);
             }
         }
+    }
+
+    private void casting(int list_num)
+    {
+
     }
 
     @Override
