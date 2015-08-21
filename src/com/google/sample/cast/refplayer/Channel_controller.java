@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
 
 import java.util.List;
@@ -30,8 +31,11 @@ public class Channel_controller extends Activity { // ActionBarActivity
 
     private TextView textView, display_channel;
     private List<MediaInfo> videos; // load the video list
+    private MediaInfo mSelectedMedia;
     private static final String mUrl ="http://www.cs.ccu.edu.tw/~cml100u/CSCLAB/f2.json";
     private VideoCastManager mCastManager;
+    private VideoCastConsumerImpl mCastConsumer;
+
 
 
     @Override
@@ -41,6 +45,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         SetObjFunc(); // Create and define object
         SetOnClick();
         mCastManager = VideoCastManager.getInstance();
+        setupCastListener();
     }
 
     private void SetObjFunc(){
@@ -193,7 +198,20 @@ public class Channel_controller extends Activity { // ActionBarActivity
 
     private void casting(int list_num)
     {
+        mSelectedMedia = videos.get(list_num);
+          mCastManager.startVideoCastControllerActivity(this, mSelectedMedia, 0, true);
+        //finish(); Whether it needs the function?
+    }
 
+    private void setupCastListener(){
+        mCastConsumer = new VideoCastConsumerImpl(){
+            /*
+            @Override
+            public void onApplicationConnected(ApplicationMetadata appMetada,
+                   String sessionId, boolean wasLaunched){
+
+            }*/
+        };
     }
 
     @Override
