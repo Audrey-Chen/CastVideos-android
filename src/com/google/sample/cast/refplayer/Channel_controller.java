@@ -14,6 +14,7 @@ import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
+import com.google.android.gms.cast.RemoteMediaPlayer;
 
 import java.util.List;
 import java.util.Timer;
@@ -35,7 +36,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
     private static final String mUrl ="http://www.cs.ccu.edu.tw/~cml100u/CSCLAB/f2.json";
     private VideoCastManager mCastManager;
     private VideoCastConsumerImpl mCastConsumer;
-
+    private RemoteMediaPlayer mRemoteMediaPlayer;
 
 
     @Override
@@ -136,6 +137,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
 
     private void go_channel()
     {
+        int position = 0;
         /* Get the input channel number */
         String channel = display_channel.getText().toString();
         int channel_num = Integer.parseInt(channel);
@@ -148,10 +150,16 @@ public class Channel_controller extends Activity { // ActionBarActivity
 
         display_channel.setText(""); // After loading channel number, then clear it
 
+        /* Judge whether this is first play channel */
+        if(mSelectedMedia != null) // not first play
+        {
+            position = (int)mRemoteMediaPlayer.getApproximateStreamPosition();
+        }
+
         /* TV display the video content at specific channel */
         VideoItemLoader vloader = new VideoItemLoader(Channel_controller.this, mUrl);
         videos = vloader.loadInBackground();
-        find_channel( channel_num);
+        find_channel( channel_num, position);
 
         /* Time Counter : after 10 secs, the screen would display the ControllerPlayer*/
         final Timer timer = new Timer();            //declare Timer
@@ -171,7 +179,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         timer.schedule(timerTask, 10000,10000 ); // Wait 10 secs to switch the display screen
     }
 
-    private void find_channel(int channel_num)
+    private void find_channel(int channel_num, int currentPosition)
     {
         MediaMetadata mm ;
         String title;
@@ -191,15 +199,15 @@ public class Channel_controller extends Activity { // ActionBarActivity
             if( channel_num == num)
             {
                 // Cast the channel content to TV screen
-                casting(i);
+                casting(i, currentPosition);
             }
         }
     }
 
-    private void casting(int list_num)
+    private void casting(int list_num, int currentPosition)
     {
         mSelectedMedia = videos.get(list_num);
-          mCastManager.startVideoCastControllerActivity(this, mSelectedMedia, 0, true);
+          mCastManager.startVideoCastControllerActivity(this, mSelectedMedia, currentPosition, true);
         //finish(); Whether it needs the function?
     }
 
