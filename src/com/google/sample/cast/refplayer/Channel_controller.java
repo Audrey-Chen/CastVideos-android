@@ -3,6 +3,7 @@ package com.google.sample.cast.refplayer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,10 +12,10 @@ import android.widget.TextView;
 
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
+import com.google.android.gms.cast.RemoteMediaPlayer;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
-import com.google.android.gms.cast.RemoteMediaPlayer;
 
 import java.util.List;
 import java.util.Timer;
@@ -153,7 +154,8 @@ public class Channel_controller extends Activity { // ActionBarActivity
         /* Judge whether this is first play channel */
         if(mSelectedMedia != null) // not first play
         {
-            position = (int)mRemoteMediaPlayer.getApproximateStreamPosition();
+            //position = (int)mRemoteMediaPlayer.getApproximateStreamPosition();
+            Log.d("Channel_controller", "mSelectedMedia != NULL");
         }
 
         /* TV display the video content at specific channel */
@@ -200,6 +202,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
             {
                 // Cast the channel content to TV screen
                 casting(i, currentPosition);
+                break;
             }
         }
     }
@@ -207,8 +210,30 @@ public class Channel_controller extends Activity { // ActionBarActivity
     private void casting(int list_num, int currentPosition)
     {
         mSelectedMedia = videos.get(list_num);
-          mCastManager.startVideoCastControllerActivity(this, mSelectedMedia, currentPosition, true);
+        /* // By starVideoCastControllerActivity(has the default cast player)
+          mCastManager.startVideoCastControllerActivity(this, mSelectedMedia, 100, true);
+        */
+
         //finish(); Whether it needs the function?
+        /* // By mCastManager.play(30)
+        try {
+            mCastManager.play(30);
+        } catch (Exception e) {
+            Utils.handleException(this, e);
+            Log.e("Channel_controler","mCastManager.play() function failed!");
+        }*/
+
+        //FragmentManager fm = getActivity().getSupportFragmentManager();
+        //VideoCastControllerFragment videoCastControllerFragment
+        //        =  (VideoCastControllerFragment) fm.findFragmentByTag(
+        //        "task");
+        try {
+            mCastManager.loadMedia(mSelectedMedia, true, 100);
+        }
+        catch (Exception e){
+            Log.e("Channel_Controller", "loadMedia and autoplay failed!");
+        }
+
     }
 
     private void setupCastListener(){
