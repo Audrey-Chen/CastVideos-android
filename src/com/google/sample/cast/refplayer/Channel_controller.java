@@ -17,8 +17,6 @@ import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCa
 import com.google.sample.cast.refplayer.browser.VideoItemLoader;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 //import android.support.v7.app.ActionBarActivity;
 
@@ -28,7 +26,8 @@ public class Channel_controller extends Activity { // ActionBarActivity
     private Button button1, button2, button3,
                    button4, button5, button6,
                    button7, button8, button9,
-                   button0, button_go, button_back, button_vid_list;
+                   button0, button_go, button_back, button_vid_list,
+                   button_up, button_down;
 
     private TextView textView, display_channel;
     private List<MediaInfo> videos; // load the video list
@@ -63,6 +62,8 @@ public class Channel_controller extends Activity { // ActionBarActivity
         button_go = (Button)findViewById(R.id.button_go);
         button_back = (Button)findViewById(R.id.button_back);
         button_vid_list = (Button)findViewById(R.id.button_vid_list);
+        button_up = (Button)findViewById(R.id.button_up);
+        button_down = (Button)findViewById(R.id.button_down);
 
         textView = (TextView)findViewById(R.id.textView);
         display_channel = (TextView)findViewById(R.id.display_channel);
@@ -82,6 +83,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         button_go.setOnClickListener(Controller_OnClick);
         button_back.setOnClickListener(Controller_OnClick);
         button_vid_list.setOnClickListener(Controller_OnClick);
+
     }
 
     private Button.OnClickListener Controller_OnClick = new Button.OnClickListener()
@@ -161,6 +163,10 @@ public class Channel_controller extends Activity { // ActionBarActivity
                 Log.d("Channel_controller", "mCastManager.getCurrentMediaPosition Failed!");
             }
         }
+        else
+        {
+            casting(0, 0);
+        }
 
         /* TV display the video content at specific channel */
         VideoItemLoader vloader = new VideoItemLoader(Channel_controller.this, mUrl);
@@ -168,14 +174,16 @@ public class Channel_controller extends Activity { // ActionBarActivity
         find_channel( channel_num, position);
 
         /* Time Counter : after 10 secs, the screen would display the ControllerPlayer*/
-        final Timer timer = new Timer();            //declare Timer
-        TimerTask timerTask;    //declare TimerTask
-
+        /*
+        final Timer timer = new Timer();
+        TimerTask timerTask;
+        */
+        /*
         timerTask = new TimerTask(){
             public void run()
             {
                 timer.cancel(); // Cancel the time counter
-                /* Entering the Player */
+                // Entering the Player
                 Intent intent = new Intent();
                 intent.setClass(Channel_controller.this, ControllerPlayer.class);
                 startActivity(intent);
@@ -183,6 +191,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         };
 
         timer.schedule(timerTask, 10000,10000 ); // Wait 10 secs to switch the display screen
+        */
     }
 
     private void find_channel(int channel_num, int currentPosition)
