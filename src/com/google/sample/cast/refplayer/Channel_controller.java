@@ -83,7 +83,7 @@ public class Channel_controller extends Activity { // ActionBarActivity
         button_go.setOnClickListener(Controller_OnClick);
         button_back.setOnClickListener(Controller_OnClick);
         button_vid_list.setOnClickListener(Controller_OnClick);
-
+        button_up.
     }
 
     private Button.OnClickListener Controller_OnClick = new Button.OnClickListener()
